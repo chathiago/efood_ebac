@@ -1,9 +1,9 @@
 import { CategoryHeader } from "@/components/common/CategoryHeader";
-import { GridRestaurant } from "@/components/layout/GridRestaurant";
 import { italianaFoods } from "@/data/italianaFoods";
-import * as S from './styles'
 import { CardRestaurant } from "@/components/common/CardRestaurant";
 import { Footer } from "@/components/common/Footer";
+import { Grid } from "@/components/layout/Grid";
+import * as S from './styles'
 
 export default function CategoryPage() {
   return (
@@ -11,11 +11,11 @@ export default function CategoryPage() {
       <CategoryHeader category="italiana" />
 
       <S.ItalianaGrid>
-        <GridRestaurant columns={3} gap="30">
+        <Grid columns={3} gap="30">
           {italianaFoods.map((card, index) => (
             <CardRestaurant key={index} image={card.image} title={card.title} description={card.description} />
           ))}
-        </GridRestaurant>
+        </Grid>
       </S.ItalianaGrid>
 
       <Footer />

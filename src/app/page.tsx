@@ -1,12 +1,12 @@
 import { Text } from "@/components/ui/Text";
-import { GridHighlight } from "@/components/layout/GridHighlight";
 import { CardHighlight } from "@/components/common/CardHighlight";
 import { Footer } from "@/components/common/Footer";
+import { Grid } from "@/components/layout/Grid";
 import { restaurantsData } from "@/data/restaurants";
 import Image from "next/image";
 import efoodLogo from "../../public/logo-efood.png"
-import * as S from "./styles"
 import Link from "next/link";
+import * as S from "./styles"
 
 export default function Page() {
 
@@ -24,9 +24,9 @@ export default function Page() {
 
       <main>
         <S.HeaderGrid>
-          <GridHighlight columns={2} gap="80">{restaurantsData.map((card, index) => (
+          <Grid columns={2} gap="80">{restaurantsData.map((card, index) => (
             <CardHighlight key={index} image={card.image} title={card.title} description={card.description} rating={card.rating} highlight={card.highlight} category={card.category as "japonesa" | "italiana"} />
-          ))}</GridHighlight>
+          ))}</Grid>
         </S.HeaderGrid>
       </main>
 
