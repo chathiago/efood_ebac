@@ -1,8 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import { Text } from "../../ui/Text";
 import { Button } from "../../ui/Button";
-
-import styles from './card.module.css';
+import * as S from "./styles";
+import Link from "next/link";
+import { categoryRoutes } from "@/data/categoryRoutes";
 
 type CardProps = {
   image: string | StaticImageData;
@@ -10,23 +11,35 @@ type CardProps = {
   description: string;
   rating: number;
   highlight?: string;
-  category: string;
+  category: keyof typeof categoryRoutes;
 }
 
 export function CardHighlight({ image, title, description, rating, highlight, category }: CardProps) {
   return (
-    <div className={styles.card}>
-      <div className={styles.cardTags}>
+    <S.Card>
+      <S.CardTags>
         {highlight && <Button variant="primary">{highlight}</Button>}
-        <Button variant="primary">{category}</Button>
-      </div>
-      <Image src={image} alt={title} className={styles.image} />
-      <div className={styles.cardHeader}>
+        <Link href={categoryRoutes[category]}>
+          <Button variant="primary">{category}</Button>
+        </Link>
+      </S.CardTags>
+
+      <Image src={image} alt={title} />
+
+      <S.CardHeader>
         <Text variant="subtitle" color="primary">{title}</Text>
         <Text variant="subtitle" color="primary">{rating} ⭐</Text>
-      </div>
-      <Text className={styles.cardDescription} variant="body" color="primary">{description}</Text>
-      <Button className={styles.cardButton} variant="primary" fullWidth={false}>Saiba mais</Button>
-    </div>
+      </S.CardHeader>
+
+      <S.CardDescription>
+        <Text variant="body" color="primary">{description}</Text>
+      </S.CardDescription>
+
+      <S.CardButton>
+        <Link href={categoryRoutes[category]}>
+          <Button variant="primary" fullWidth={false}>Saiba mais</Button>
+        </Link>
+      </S.CardButton>
+    </S.Card>
   )
 }

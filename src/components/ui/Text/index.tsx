@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
 
 type TextVariant = "title" | "subtitle" | "body" | "small";
+type TextWeight = "normal" | "bold" | "light";
 type ThemeColor = "primary" | "secondary" | "highlight" | "text";
 
 interface TextProps {
   variant?: TextVariant;
   color?: ThemeColor;
+  weight?: TextWeight;
   children: ReactNode;
   className?: string;
 }
@@ -29,8 +31,14 @@ const styles: Record<TextVariant, React.CSSProperties> = {
   },
 };
 
-export function Text({ variant = "body", color = "text", children, className }: TextProps) {
+const fontWeight: Record<TextWeight, string | number> = {
+  normal: 400,
+  bold: 700,
+  light: 200,
+}
+
+export function Text({ variant = "body", color = "text", weight, children, className }: TextProps) {
   return (
-    <span style={{ ...styles[variant], color: `var(--${color}-color)` }} className={className}>{children}</span>
+    <span style={{ ...styles[variant], color: `var(--${color}-color)`, ...(weight && { fontWeight: fontWeight[weight] }) }} className={className}>{children}</span>
   )
 }
